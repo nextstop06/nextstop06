@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login / Sign Up - NextStop</title>
+<meta name="description" content="Login or create your NextStop account">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- CSS -->
+<link rel="stylesheet" href="styles/layout.css">
+<link rel="stylesheet" href="styles/auth.css">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="images/nextstop-logo.png">
+</head>
+<body class="auth-body">
+
+<!-- Background -->
+<div class="auth-background"></div>
+
+<!-- Header -->
+<header class="auth-header">
+  <div class="container">
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <img src="images/nextstop-logo.png" alt="NextStop" class="logo-image">
+        <span class="logo-text">NextStop</span>
+      </a>
+      <a href="index.html" class="btn btn-ghost">Back to Home</a>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="auth-main">
+  <div class="container">
+    <div class="auth-container">
+      <div class="auth-card">
+        <!-- Login Form -->
+        <div class="auth-form-container" id="login-container">
+          <div class="auth-form-header">
+            <h1 class="auth-title">Welcome Back</h1>
+            <p class="auth-subtitle">Sign in to your NextStop account</p>
+          </div>
+
+          <form class="auth-form" id="login-form">
+            <div class="form-group">
+              <label for="login-email" class="form-label">Email Address</label>
+              <input type="email" id="login-email" class="form-input" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <label for="login-password" class="form-label">Password</label>
+              <input type="password" id="login-password" class="form-input" required placeholder="Enter your password">
+            </div>
+            <div class="form-options">
+              <label class="checkbox-label">
+                <input type="checkbox" id="remember" class="checkbox">
+                <span class="checkbox-text">Remember me</span>
+              </label>
+              <a href="#" class="auth-link">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large auth-btn">Sign In</button>
+          </form>
+
+          <div class="auth-divider"><span>or</span></div>
+          <div class="auth-switch">
+            <p>Don't have an account? <button type="button" class="auth-link-btn" id="show-signup">Create account</button></p>
+          </div>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="auth-form-container hidden" id="signup-container">
+          <div class="auth-form-header">
+            <h1 class="auth-title">Create Account</h1>
+            <p class="auth-subtitle">Join NextStop and start your journey</p>
+          </div>
+
+          <form class="auth-form" id="signup-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" id="firstName" class="form-input" required placeholder="First name">
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" id="lastName" class="form-input" required placeholder="Last name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="signup-email" class="form-label">Email Address</label>
+              <input type="email" id="signup-email" class="form-input" required placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="tel" id="phone" class="form-input" required placeholder="Enter your phone">
+            </div>
+
+            <div class="form-group">
+              <label for="signup-password" class="form-label">Password</label>
+              <input type="password" id="signup-password" class="form-input" required placeholder="Create password">
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input type="password" id="confirmPassword" class="form-input" required placeholder="Confirm password">
+            </div>
+
+            <div class="form-options">
+              <label class="checkbox-label">
+                <input type="checkbox" id="terms" class="checkbox" required>
+                <span class="checkbox-text">I agree to the <a href="#" class="auth-link">Terms</a> and <a href="#" class="auth-link">Privacy Policy</a></span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large auth-btn">Create Account</button>
+          </form>
+
+          <div class="auth-divider"><span>or</span></div>
+          <div class="auth-switch">
+            <p>Already have an account? <button type="button" class="auth-link-btn" id="show-login">Sign in</button></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Layout JS -->
+<script src="js/layout.js"></script>
+
+<!-- Firebase Modular SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+// Firebase config
+const firebaseConfig = {
+            apiKey: "AIzaSyBwaAqu8b6bchZ_9x4XLxZem-cixdKd35E",
+            authDomain: "nextstop-cdab2.firebaseapp.com",
+            projectId: "nextstop-cdab2",
+            storageBucket: "nextstop-cdab2.firebasestorage.app",
+            messagingSenderId: "12223013337",
+            appId: "1:12223013337:web:8ed340a114e576afc239c8",
+            measurementId: "G-08SJWT4GM4"
+        };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Switch login/signup forms
+document.getElementById("show-signup").addEventListener("click", () => {
+  document.getElementById("login-container").classList.add("hidden");
+  document.getElementById("signup-container").classList.remove("hidden");
+});
+document.getElementById("show-login").addEventListener("click", () => {
+  document.getElementById("signup-container").classList.add("hidden");
+  document.getElementById("login-container").classList.remove("hidden");
+});
+
+// Signup
+document.getElementById("signup-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const email = document.getElementById("signup-email").value;
+  const phone = document.getElementById("phone").value;
+  const password = document.getElementById("signup-password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  if (password !== confirmPassword) { alert("Passwords do not match!"); return; }
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    await setDoc(doc(db, "users", user.uid), { firstName, lastName, email, phone });
+
+    alert("Account created successfully!");
+    window.location.href = "profile.html";
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+// Login
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Login successful!");
+    window.location.href = "profile.html";
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+// Optional: track auth state
+onAuthStateChanged(auth, (user) => {
+  console.log("Auth state changed:", user);
+});
+</script>
+</body>
+</html>

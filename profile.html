@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Profile - NextStop</title>
+<meta name="description" content="Manage your NextStop profile" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<!-- CSS -->
+<link rel="stylesheet" href="styles/layout.css" />
+<link rel="stylesheet" href="styles/profile.css" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="images/nextstop-logo.png" />
+</head>
+<body class="profile-body">
+
+<!-- Background -->
+<div class="profile-background"></div>
+
+<!-- Header -->
+<header id="header" class="profile-header">
+  <div class="container">
+    <div class="header-content">
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        <img src="images/nextstop-logo.png" alt="NextStop" class="logo-image" />
+        <span class="logo-text">NextStop</span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav-desktop">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="profile.html" class="nav-link active">Profile</a>
+        <a href="dregister.html" class="nav-link">Driver Registration</a>
+      </nav>
+
+      <!-- Logout Button -->
+      <button class="btn btn-outline" id="logout-btn">Logout</button>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="profile-main">
+  <div class="container">
+    <div class="profile-container">
+      <!-- Profile Header -->
+      <div class="profile-header-section">
+        <div class="profile-avatar">
+          <svg class="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <div class="profile-info">
+          <h1 class="profile-name" id="profile-name">Loading...</h1>
+          <p class="profile-email" id="profile-email">Loading...</p>
+        </div>
+      </div>
+
+      <!-- Profile Content -->
+      <div class="profile-content">
+        <!-- Personal Information -->
+        <div class="profile-section">
+          <h2 class="section-title">Personal Information</h2>
+          <form class="profile-form" id="profile-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" id="firstName" class="form-input" value="" />
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" id="lastName" class="form-input" value="" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" id="email" class="form-input" value="" disabled />
+            </div>
+
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="tel" id="phone" class="form-input" value="" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+          </form>
+        </div>
+
+        <!-- Booking History -->
+        <div class="profile-section">
+          <h2 class="section-title">Recent Bookings</h2>
+          <div class="bookings-list" id="bookings-list">
+            <!-- Bookings will be populated by Firebase -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- JavaScript -->
+<script src="js/layout.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+            apiKey: "AIzaSyBwaAqu8b6bchZ_9x4XLxZem-cixdKd35E",
+            authDomain: "nextstop-cdab2.firebaseapp.com",
+            projectId: "nextstop-cdab2",
+            storageBucket: "nextstop-cdab2.firebasestorage.app",
+            messagingSenderId: "12223013337",
+            appId: "1:12223013337:web:8ed340a114e576afc239c8",
+            measurementId: "G-08SJWT4GM4"
+        };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const profileName = document.getElementById("profile-name");
+  const profileEmail = document.getElementById("profile-email");
+  const firstNameInput = document.getElementById("firstName");
+  const lastNameInput = document.getElementById("lastName");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phone");
+  const profileForm = document.getElementById("profile-form");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  let currentUser = null;
+
+  // Check user auth state
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "auth.html"; // redirect if not logged in
+      return;
+    }
+
+    currentUser = user;
+
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      const data = userDoc.data();
+      profileName.textContent = data.firstName + " " + data.lastName;
+      profileEmail.textContent = data.email;
+      firstNameInput.value = data.firstName;
+      lastNameInput.value = data.lastName;
+      emailInput.value = data.email;
+      phoneInput.value = data.phone || "";
+    }
+  });
+
+  // Logout
+  logoutBtn.addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "auth.html";
+  });
+
+  // Update profile
+  profileForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!currentUser) return;
+
+    await updateDoc(doc(db, "users", currentUser.uid), {
+      firstName: firstNameInput.value,
+      lastName: lastNameInput.value,
+      phone: phoneInput.value
+    });
+
+    profileName.textContent = firstNameInput.value + " " + lastNameInput.value;
+    alert("Profile updated successfully!");
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,526 @@
+/* Index page specific styles */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+/* Desktop Navigation */
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--foreground);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+/* Auth buttons */
+.auth-desktop {
+  display: none;
+}
+
+.auth-state {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.mobile-menu-btn:hover {
+  color: var(--primary-color);
+}
+
+.menu-icon,
+.close-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Mobile Navigation */
+.nav-mobile {
+  display: none;
+  border-top: 1px solid var(--border);
+  background-color: var(--background);
+}
+
+.nav-mobile.active {
+  display: block;
+}
+
+.nav-mobile-content {
+  padding: 0.5rem 0 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-mobile-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: var(--foreground);
+  text-decoration: none;
+  border-radius: calc(var(--radius) - 2px);
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-mobile-link:hover {
+  color: var(--primary-color);
+  background-color: var(--muted);
+}
+
+.nav-mobile-auth {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.5rem;
+}
+
+.nav-mobile-auth-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: calc(var(--radius) - 2px);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.nav-mobile-auth-link:hover {
+  background-color: var(--muted);
+}
+
+.nav-mobile-logout {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: none;
+  border: none;
+  color: var(--foreground);
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-mobile-logout:hover {
+  color: var(--primary-color);
+  background-color: var(--muted);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  /* Increased height significantly to keep search card within image bounds */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  /* Reduced negative margin to keep card higher within hero image */
+  margin-bottom: -4rem;
+}
+
+.hero-text {
+  max-width: 64rem;
+  margin: 0 auto 1rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  text-wrap: pretty;
+}
+
+/* Search Card */
+.search-card {
+  max-width: 32rem;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  /* Reduced transform to keep card within hero image bounds */
+  transform: translateY(-1rem);
+}
+
+.search-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.form-input,
+.form-select {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  background-color: var(--input);
+  color: var(--foreground);
+  transition: all 0.2s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* Buses Section */
+.buses-section {
+  /* Reduced top padding since card is now positioned higher */
+  padding: 6rem 0 4rem;
+  background-color: rgba(247, 248, 249, 0.3);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: var(--muted-foreground);
+  font-size: 1.125rem;
+}
+
+.buses-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* Bus Card */
+.bus-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease-in-out;
+}
+
+.bus-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.bus-card-header {
+  padding: 1.5rem 1.5rem 1rem;
+}
+
+.bus-card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.bus-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.bus-card-time {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.bus-card-route {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.bus-card-duration {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.bus-card-price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.bus-card-content {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.bus-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.bus-stat {
+  text-align: center;
+  padding: 0.75rem;
+  background-color: var(--muted);
+  border-radius: var(--radius);
+}
+
+.bus-stat-number {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: block;
+}
+
+.bus-stat-label {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.bus-book-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Features Section */
+.features-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.features-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+}
+
+.features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.feature-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.features-image {
+  position: relative;
+  height: 16rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.feature-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--foreground);
+  color: var(--background);
+  padding: 2rem 0;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .nav-desktop {
+    display: flex;
+  }
+
+  .auth-desktop {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: 3.75rem;
+  }
+
+  .buses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .buses-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-title {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .search-card {
+    margin: 0 0.75rem;
+    padding: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .bus-card-title-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}

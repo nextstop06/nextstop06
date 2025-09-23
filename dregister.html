@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driver Registration - NextStop</title>
+  <meta name="description" content="Register as a driver with NextStop" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/profile.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/nextstop-logo.png" />
+</head>
+<body class="profile-body">
+  <!-- Background -->
+  <div class="profile-background"></div>
+
+  <!-- Header -->
+  <header id="header" class="profile-header">
+    <div class="container">
+      <div class="header-content">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <img
+            src="images/nextstop-logo.png"
+            alt="NextStop"
+            class="logo-image"
+          />
+          <span class="logo-text">NextStop</span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="nav-desktop">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="driver-registration.html" class="nav-link active">Driver Registration</a>
+        </nav>
+
+        <!-- Logout Button -->
+        <button class="btn btn-outline" id="logout-btn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="profile-main">
+    <div class="container">
+      <div class="profile-container">
+        <!-- Header -->
+        <div class="profile-header-section">
+          <div class="profile-avatar">
+            <svg
+              class="avatar-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="profile-info">
+            <h1 class="profile-name">Driver Registration</h1>
+            <p class="profile-email">Fill out your details to join NextStop</p>
+          </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="profile-content">
+          <div class="profile-section">
+            <h2 class="section-title">Driver Details</h2>
+            <form class="profile-form" id="driver-form">
+              <div class="form-group">
+                <label for="driverName" class="form-label">Driver Name</label>
+                <input type="text" id="driverName" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="contact" class="form-label">Contact Number</label>
+                <input type="text" id="contact" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="licenseNumber" class="form-label">License Number</label>
+                <input type="text" id="licenseNumber" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="vehicleType" class="form-label">Vehicle Type/Model</label>
+                <input type="text" id="vehicleType" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="vehicleNumber" class="form-label">Vehicle Number</label>
+                <input type="text" id="vehicleNumber" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="documentUpload" class="form-label">Upload License/Document</label>
+                <input type="file" id="documentUpload" class="form-input" accept="image/*,.pdf" />
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit Registration</button>
+              <p id="message" class="message"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Firebase & JS Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBwaAqu8b6bchZ_9x4XLxZem-cixdKd35E",
+      authDomain: "nextstop-cdab2.firebaseapp.com",
+      projectId: "nextstop-cdab2",
+      storageBucket: "nextstop-cdab2.appspot.com",
+      messagingSenderId: "12223013337",
+      appId: "1:12223013337:web:8ed340a114e576afc239c8",
+      measurementId: "G-08SJWT4GM4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const driverForm = document.getElementById("driver-form");
+    const driverName = document.getElementById("driverName");
+    const contact = document.getElementById("contact");
+    const licenseNumber = document.getElementById("licenseNumber");
+    const vehicleType = document.getElementById("vehicleType");
+    const vehicleNumber = document.getElementById("vehicleNumber");
+    const documentUpload = document.getElementById("documentUpload");
+    const messageDiv = document.getElementById("message");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    let currentUser = null;
+    let documentData = "";
+
+    // Convert file to Base64
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // File input change event
+    documentUpload.addEventListener("change", async () => {
+      if (documentUpload.files.length > 0) {
+        const file = documentUpload.files[0];
+        documentData = await readFileAsBase64(file);
+      }
+    });
+
+    // Auth state
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+
+    // Logout
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+
+    // Submit form
+    driverForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!currentUser) return;
+
+      messageDiv.textContent = "";
+      messageDiv.className = "message";
+
+      try {
+        const driverRef = doc(db, "drivers", currentUser.uid);
+        await setDoc(driverRef, {
+          name: driverName.value,
+          contact: contact.value,
+          licenseNumber: licenseNumber.value,
+          vehicleType: vehicleType.value,
+          vehicleNumber: vehicleNumber.value,
+          documentData: documentData,
+          userId: currentUser.uid,
+          status: "pending"
+        });
+
+        messageDiv.textContent = "✅ Your driver registration request has been submitted!";
+        messageDiv.className = "message success";
+
+        driverForm.reset();
+        documentData = "";
+
+        // Redirect after 2.5 seconds
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 2500);
+
+      } catch (error) {
+        messageDiv.textContent = "❌ Error: " + error.message;
+        messageDiv.className = "message error";
+        console.error("Registration error:", error);
+      }
+    });
+  </script>
+</body>
+</html>
