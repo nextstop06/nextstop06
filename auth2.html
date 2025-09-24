@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Bus - NextStop Admin</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+  <style>
+    body { font-family: 'Inter', sans-serif; margin:0; padding:20px; background:#f4f4f4; }
+    h1 { text-align:center; }
+    form { max-width:600px; margin:0 auto; background:#fff; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+    .form-group { margin-bottom:15px; }
+    label { display:block; margin-bottom:5px; font-weight:600; }
+    input, select, button { width:100%; padding:8px; border-radius:4px; border:1px solid #ccc; font-size:16px; }
+    button { background:#007bff; color:#fff; border:none; cursor:pointer; margin-top:10px; }
+    button:hover { background:#0056b3; }
+    .stops-list { margin-top:10px; }
+    .stop-item { display:flex; align-items:center; margin-bottom:5px; }
+    .stop-item select { flex:1; margin-right:5px; }
+    .remove-btn { background:red; color:#fff; border:none; padding:5px 10px; cursor:pointer; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <h1>Add Bus</h1>
+  <form id="busForm">
+    <div class="form-group">
+      <label for="busNumber">Bus Number</label>
+      <input type="text" id="busNumber" required>
+    </div>
+
+    <div class="form-group">
+      <label for="startPoint">Start Point</label>
+      <select id="startPoint" required></select>
+    </div>
+
+    <div class="form-group">
+      <label>Intermediate Stops</label>
+      <div id="stopsContainer" class="stops-list"></div>
+      <button type="button" id="addStopBtn">Add Stop</button>
+    </div>
+
+    <div class="form-group">
+      <label for="endPoint">End Point</label>
+      <select id="endPoint" required></select>
+    </div>
+
+    <div class="form-group">
+      <label for="busDate">Date</label>
+      <input type="date" id="busDate" required>
+    </div>
+
+    <div class="form-group">
+      <label for="departureTime">Departure Time</label>
+      <input type="time" id="departureTime" required>
+    </div>
+
+    <div class="form-group">
+      <label for="totalSeats">Total Seats</label>
+      <input type="number" id="totalSeats" min="1" required>
+    </div>
+
+    <div class="form-group">
+      <label for="availableMen">Available Seats (Men)</label>
+      <input type="number" id="availableMen" min="0" required>
+    </div>
+
+    <div class="form-group">
+      <label for="availableWomen">Available Seats (Women)</label>
+      <input type="number" id="availableWomen" min="0" required>
+    </div>
+
+    <button type="submit">Save Bus</button>
+  </form>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBwaAqu8b6bchZ_9x4XLxZem-cixdKd35E",
+      authDomain: "nextstop-cdab2.firebaseapp.com",
+      projectId: "nextstop-cdab2",
+      storageBucket: "nextstop-cdab2.appspot.com",
+      messagingSenderId: "12223013337",
+      appId: "1:12223013337:web:8ed340a114e576afc239c8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const startSelect = document.getElementById('startPoint');
+    const endSelect = document.getElementById('endPoint');
+    const stopsContainer = document.getElementById('stopsContainer');
+    const addStopBtn = document.getElementById('addStopBtn');
+
+    let busStopsList = [];
+
+    // Fetch bus stops from Firestore
+    async function loadBusStops() {
+      const snapshot = await getDocs(collection(db, 'busStops'));
+      busStopsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+      [startSelect, endSelect].forEach(select => {
+        select.innerHTML = '<option value="">Select Bus Stop</option>';
+        busStopsList.forEach(stop => {
+          const option = document.createElement('option');
+          option.value = stop.id;
+          option.textContent = stop.name;
+          select.appendChild(option);
+        });
+      });
+    }
+
+    loadBusStops();
+
+    // Add intermediate stop
+    addStopBtn.addEventListener('click', () => {
+      const div = document.createElement('div');
+      div.className = 'stop-item';
+      const select = document.createElement('select');
+      select.innerHTML = '<option value="">Select Stop</option>';
+      busStopsList.forEach(stop => {
+        const option = document.createElement('option');
+        option.value = stop.id;
+        option.textContent = stop.name;
+        select.appendChild(option);
+      });
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.textContent = 'Remove';
+      removeBtn.className = 'remove-btn';
+      removeBtn.onclick = () => div.remove();
+
+      div.appendChild(select);
+      div.appendChild(removeBtn);
+      stopsContainer.appendChild(div);
+    });
+
+    // Form submission
+    document.getElementById('busForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const busNumber = document.getElementById('busNumber').value.trim();
+      const start = startSelect.value;
+      const end = endSelect.value;
+      const date = document.getElementById('busDate').value;
+      const departureTime = document.getElementById('departureTime').value;
+      const totalSeats = parseInt(document.getElementById('totalSeats').value);
+      const availableMen = parseInt(document.getElementById('availableMen').value);
+      const availableWomen = parseInt(document.getElementById('availableWomen').value);
+
+      const intermediateStops = Array.from(stopsContainer.querySelectorAll('select'))
+        .map(s => s.value)
+        .filter(v => v);
+
+      if (!busNumber || !start || !end || !date || !departureTime) {
+        alert('Please fill all required fields');
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, 'buses'), {
+          busNumber,
+          start,
+          intermediateStops,
+          end,
+          date,
+          departureTime,
+          totalSeats,
+          availableMen,
+          availableWomen
+        });
+        alert('Bus added successfully!');
+        document.getElementById('busForm').reset();
+        stopsContainer.innerHTML = '';
+      } catch (err) {
+        console.error(err);
+        alert('Failed to save bus');
+      }
+    });
+  </script>
+</body>
+</html>

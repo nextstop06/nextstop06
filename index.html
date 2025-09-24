@@ -1,216 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextStop - Bus Booking Platform</title>
-    <meta name="description" content="Find and book your perfect bus journey with ease">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/index.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/nextstop-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextStop - Bus Booking Platform</title>
+  <meta name="description" content="Find and book your perfect bus journey with ease">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/nextstop-logo.png">
 </head>
 <body>
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="container">
-            <div class="header-content">
-                <!-- Logo -->
-                <a href="#" class="logo">
-                    <img src="images/nextstop-logo.png" alt="NextStop" class="logo-image">
-                    <span class="logo-text">NextStop</span>
-                </a>
+<!-- Header -->
+<header id="header" class="header">
+  <div class="container">
+    <div class="header-content">
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        <img src="images/nextstop-logo.png" alt="NextStop" class="logo-image">
+        <span class="logo-text">NextStop</span>
+      </a>
 
-                <!-- Desktop Navigation -->
-                <nav class="nav-desktop">
-                    <a href="#" class="nav-link">Home</a>
-                    <a href="#services" class="nav-link">Services</a>
-                    <a href="#routes" class="nav-link">Routes</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                </nav>
+      <!-- Desktop Navigation -->
+      <nav class="nav-desktop">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="aboutus.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
 
-                <!-- Desktop Auth Button -->
-                <div class="auth-desktop">
-                    <div id="auth-logged-out" class="auth-state">
-                        <a href="auth.html" class="btn btn-primary">Login / Register</a>
-                    </div>
-                    <div id="auth-logged-in" class="auth-state hidden">
-                        <a href="profile.html" class="btn btn-ghost profile-btn">
-                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            Profile
-                        </a>
-                        <button class="btn btn-outline" id="logout-btn">Logout</button>
-                    </div>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu">
-                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                    <svg class="close-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div class="nav-mobile" id="mobile-nav">
-                <div class="nav-mobile-content">
-                    <a href="#" class="nav-mobile-link">Home</a>
-                    <a href="#services" class="nav-mobile-link">Services</a>
-                    <a href="#routes" class="nav-mobile-link">Routes</a>
-                    <a href="#about" class="nav-mobile-link">About</a>
-                    <a href="#contact" class="nav-mobile-link">Contact</a>
-                    
-                    <div class="nav-mobile-auth">
-                        <div id="mobile-auth-logged-out" class="auth-state">
-                            <a href="auth.html" class="nav-mobile-auth-link">Login / Register</a>
-                        </div>
-                        <div id="mobile-auth-logged-in" class="auth-state hidden">
-                            <a href="profile.html" class="nav-mobile-link">Profile</a>
-                            <button class="nav-mobile-logout" id="mobile-logout-btn">Logout</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- Desktop Auth Button -->
+      <div class="auth-desktop">
+        <div id="auth-logged-out" class="auth-state">
+          <a href="auth.html" class="btn btn-primary">Login / Register</a>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-background">
-                <img src="images/hero-bus.jpg" alt="Modern bus on scenic highway" class="hero-image">
-                <div class="hero-overlay"></div>
-            </div>
-            
-            <div class="hero-content">
-                <div class="container">
-                    <div class="hero-text">
-                        <h1 class="hero-title">Search for bus tickets</h1>
-                        <p class="hero-subtitle">Find and book your perfect bus journey with ease</p>
-                    </div>
-
-                    <!-- Search Box -->
-                    <div class="search-card">
-                        <h2 class="search-title">Find Your Bus</h2>
-                        
-                        <form class="search-form" id="search-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="from-select" class="form-label">Starting Bus Stand</label>
-                                    <select id="from-select" class="form-select" required>
-                                        <option value="">Select Starting Point</option>
-                                        <option value="stand1">Bus Stand 1</option>
-                                        <option value="stand2">Bus Stand 2</option>
-                                        <option value="stand3">Central Station</option>
-                                        <option value="stand4">North Terminal</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="to-select" class="form-label">Ending Bus Stand</label>
-                                    <select id="to-select" class="form-select" required>
-                                        <option value="">Select Ending Point</option>
-                                        <option value="stand3">Bus Stand 3</option>
-                                        <option value="stand4">Bus Stand 4</option>
-                                        <option value="stand5">South Terminal</option>
-                                        <option value="stand6">East Station</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="date-input" class="form-label">Date</label>
-                                <input type="date" id="date-input" class="form-input" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-large search-btn">
-                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <path d="m21 21-4.35-4.35"></path>
-                                </svg>
-                                Search Buses
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Available Buses Section -->
-        <section class="buses-section">
-            <div class="container">
-                <div class="section-header">
-                    <h3 class="section-title">Available Buses</h3>
-                    <p class="section-subtitle">Choose from our comfortable and reliable bus services</p>
-                </div>
-
-                <div class="buses-grid" id="buses-grid">
-                    <!-- Bus cards will be generated by JavaScript -->
-                </div>
-
-                <!-- Features Section -->
-                <div class="features-section">
-                    <div class="features-content">
-                        <h4 class="features-title">Why Choose NextStop?</h4>
-                        <ul class="features-list">
-                            <li class="feature-item">
-                                <div class="feature-dot"></div>
-                                Comfortable and clean buses
-                            </li>
-                            <li class="feature-item">
-                                <div class="feature-dot"></div>
-                                Professional and experienced drivers
-                            </li>
-                            <li class="feature-item">
-                                <div class="feature-dot"></div>
-                                Real-time tracking and updates
-                            </li>
-                            <li class="feature-item">
-                                <div class="feature-dot"></div>
-                                24/7 customer support
-                            </li>
-                            <li class="feature-item">
-                                <div class="feature-dot"></div>
-                                Safe and secure payment options
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="features-image">
-                        <img src="images/bus-interior.jpg" alt="Comfortable bus interior" class="feature-img">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p class="footer-text">&copy; 2025 NextStop. All rights reserved.</p>
+        <div id="auth-logged-in" class="auth-state hidden">
+          <a href="profile.html" class="btn btn-ghost profile-btn">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Profile
+          </a>
+          <button class="btn btn-outline" id="logout-btn">Logout</button>
         </div>
-    </footer>
+      </div>
 
-    <!-- JavaScript -->
-    <script src="js/layout.js"></script>
-    <script src="js/index.js"></script>
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+        <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="close-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="nav-mobile" id="mobile-nav">
+      <div class="nav-mobile-content">
+        <a href="index.html" class="nav-mobile-link">Home</a>
+        <a href="#services" class="nav-mobile-link">Services</a>
+        <a href="#routes" class="nav-mobile-link">Routes</a>
+        <a href="#about" class="nav-mobile-link">About</a>
+        <a href="#contact" class="nav-mobile-link">Contact</a>
+
+        <div class="nav-mobile-auth">
+          <div id="mobile-auth-logged-out" class="auth-state">
+            <a href="auth.html" class="nav-mobile-auth-link">Login / Register</a>
+          </div>
+          <div id="mobile-auth-logged-in" class="auth-state hidden">
+            <a href="profile.html" class="nav-mobile-link">Profile</a>
+            <button class="nav-mobile-logout" id="mobile-logout-btn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <img src="images/hero-bus.jpg" alt="Modern bus on scenic highway" class="hero-image">
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="container">
+        <div class="hero-text">
+          <h1 class="hero-title">Search for bus tickets</h1>
+          <p class="hero-subtitle">Find and book your perfect bus journey with ease</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-card">
+          <h2 class="search-title">Find Your Bus</h2>
+          <form class="search-form" id="search-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="from-select" class="form-label">Starting Bus Stand</label>
+                <select id="from-select" class="form-select" required>
+                  <option value="">Loading...</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="to-select" class="form-label">Ending Bus Stand</label>
+                <select id="to-select" class="form-select" required>
+                  <option value="">Loading...</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="date-input" class="form-label">Date</label>
+              <input type="date" id="date-input" class="form-input" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large search-btn">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              Search Buses
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Available Buses Section -->
+  <section class="buses-section">
+    <div class="container">
+      <div class="section-header">
+        <h3 class="section-title">Available Buses</h3>
+        <p class="section-subtitle">Choose from our comfortable and reliable bus services</p>
+      </div>
+      <div class="buses-grid" id="buses-grid"></div>
+
+      <!-- Features Section -->
+      <div class="features-section">
+        <div class="features-content">
+          <h4 class="features-title">Why Choose NextStop?</h4>
+          <ul class="features-list">
+            <li class="feature-item"><div class="feature-dot"></div> Comfortable and clean buses</li>
+            <li class="feature-item"><div class="feature-dot"></div> Professional and experienced drivers</li>
+            <li class="feature-item"><div class="feature-dot"></div> Real-time tracking and updates</li>
+            <li class="feature-item"><div class="feature-dot"></div> 24/7 customer support</li>
+            <li class="feature-item"><div class="feature-dot"></div> Safe and secure payment options</li>
+          </ul>
+        </div>
+        <div class="features-image">
+          <img src="images/bus-interior.jpg" alt="Comfortable bus interior" class="feature-img">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">&copy; 2025 NextStop. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Firebase & Scripts -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBwaAqu8b6bchZ_9x4XLxZem-cixdKd35E",
+    authDomain: "nextstop-cdab2.firebaseapp.com",
+    projectId: "nextstop-cdab2",
+    storageBucket: "nextstop-cdab2.appspot.com",
+    messagingSenderId: "12223013337",
+    appId: "1:12223013337:web:8ed340a114e576afc239c8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Nav auth switching
+  const loggedOutEls = document.querySelectorAll("#auth-logged-out, #mobile-auth-logged-out");
+  const loggedInEls = document.querySelectorAll("#auth-logged-in, #mobile-auth-logged-in");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loggedOutEls.forEach(el => el.classList.add("hidden"));
+      loggedInEls.forEach(el => el.classList.remove("hidden"));
+    } else {
+      loggedOutEls.forEach(el => el.classList.remove("hidden"));
+      loggedInEls.forEach(el => el.classList.add("hidden"));
+    }
+  });
+
+  document.getElementById("logout-btn")?.addEventListener("click", () => signOut(auth));
+  document.getElementById("mobile-logout-btn")?.addEventListener("click", () => signOut(auth));
+
+  // Load stops
+  const fromSelect = document.getElementById("from-select");
+  const toSelect = document.getElementById("to-select");
+  let stopMap = {};
+
+  async function loadStops() {
+    const snapshot = await getDocs(collection(db, "busStops"));
+    fromSelect.innerHTML = '<option value="">Select Starting Point</option>';
+    toSelect.innerHTML = '<option value="">Select Ending Point</option>';
+    snapshot.forEach(doc => {
+      const stop = doc.data();
+      stopMap[doc.id] = stop.name;
+      const opt1 = document.createElement("option");
+      opt1.value = doc.id; opt1.textContent = stop.name;
+      fromSelect.appendChild(opt1);
+      const opt2 = document.createElement("option");
+      opt2.value = doc.id; opt2.textContent = stop.name;
+      toSelect.appendChild(opt2);
+    });
+  }
+
+  // Load buses
+  const busesGrid = document.getElementById("buses-grid");
+  async function loadBuses() {
+    const snapshot = await getDocs(collection(db, "buses"));
+    busesGrid.innerHTML = "";
+    snapshot.forEach(doc => {
+      const bus = doc.data();
+      const routeStops = [
+        stopMap[bus.start] || "Unknown",
+        ...(bus.intermediateStops || []).map(id => stopMap[id] || "Unknown"),
+        stopMap[bus.end] || "Unknown"
+      ];
+      const card = document.createElement("div");
+      card.className = "bus-card";
+      card.innerHTML = `
+        <h4 class="bus-title">Bus ${bus.number || "N/A"}</h4>
+        <p><strong>Route:</strong> ${routeStops.join(" → ")}</p>
+        <p><strong>Total Seats:</strong> ${bus.totalSeats || "N/A"}</p>
+        <p><strong>Available Seats:</strong> ${bus.availableSeats || "N/A"}</p>
+        <p><strong>Departure:</strong> ${bus.departureTime || "N/A"}</p>
+      `;
+      busesGrid.appendChild(card);
+    });
+  }
+
+  // Search filter
+  document.getElementById("search-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const from = fromSelect.value;
+    const to = toSelect.value;
+    const snapshot = await getDocs(collection(db, "buses"));
+    busesGrid.innerHTML = "";
+    snapshot.forEach(doc => {
+      const bus = doc.data();
+      const route = [bus.start, ...(bus.intermediateStops || []), bus.end];
+      if (route.includes(from) && route.includes(to) && route.indexOf(from) < route.indexOf(to)) {
+        const routeStops = route.map(id => stopMap[id] || "Unknown");
+        const card = document.createElement("div");
+        card.className = "bus-card";
+        card.innerHTML = `
+          <h4 class="bus-title">Bus ${bus.number || "N/A"}</h4>
+          <p><strong>Route:</strong> ${routeStops.join(" → ")}</p>
+          <p><strong>Total Seats:</strong> ${bus.totalSeats || "N/A"}</p>
+          <p><strong>Available Seats:</strong> ${bus.availableSeats || "N/A"}</p>
+          <p><strong>Departure:</strong> ${bus.departureTime || "N/A"}</p>
+        `;
+        busesGrid.appendChild(card);
+      }
+    });
+  });
+
+  // Init
+  (async function init() {
+    await loadStops();
+    await loadBuses();
+  })();
+</script>
 </body>
 </html>

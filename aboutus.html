@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - NextStop</title>
+  <meta name="description" content="About the NextStop team and mission">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/index.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/nextstop-logo.png">
+</head>
+<body>
+
+<!-- Header -->
+<header id="header" class="header">
+  <div class="container">
+    <div class="header-content">
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        <img src="images/nextstop-logo.png" alt="NextStop" class="logo-image">
+        <span class="logo-text">NextStop</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="nav-desktop">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="aboutus.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Desktop Auth Button -->
+      <div class="auth-desktop">
+        <div id="auth-logged-out" class="auth-state">
+          <a href="auth.html" class="btn btn-primary">Login / Register</a>
+        </div>
+        <div id="auth-logged-in" class="auth-state hidden">
+          <a href="profile.html" class="btn btn-ghost profile-btn">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Profile
+          </a>
+          <button class="btn btn-outline" id="logout-btn">Logout</button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu">
+        <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="close-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="nav-mobile" id="mobile-nav">
+      <div class="nav-mobile-content">
+        <a href="index.html" class="nav-mobile-link">Home</a>
+        <a href="aboutus.html" class="nav-mobile-link">About Us</a>
+        <a href="contact.html" class="nav-mobile-link">Contact</a>
+
+        <div class="nav-mobile-auth">
+          <div id="mobile-auth-logged-out" class="auth-state">
+            <a href="auth.html" class="nav-mobile-auth-link">Login / Register</a>
+          </div>
+          <div id="mobile-auth-logged-in" class="auth-state hidden">
+            <a href="profile.html" class="nav-mobile-link">Profile</a>
+            <button class="nav-mobile-logout" id="mobile-logout-btn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background" style="background-color:#f2f2f2; min-height:250px; display:flex; align-items:center; justify-content:center;">
+      <h1 class="hero-title" style="font-size:2.5rem; color:#333;">About Us</h1>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section" style="padding:50px 0; background:#fff;">
+    <div class="container">
+      <div class="section-header" style="text-align:center; margin-bottom:40px;">
+        <h3 class="section-title">Meet Team Hexhive</h3>
+        <p class="section-subtitle">First semester students creating NextStop</p>
+      </div>
+
+      <div class="team-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:30px;">
+        <!-- Team Member Card -->
+        <div class="team-card" style="text-align:center; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <img src="/images/de.jpeg" alt="Deepak Mathur" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:15px;">
+          <h4 style="margin:0; font-weight:600;">Deepak Mathur</h4>
+          <p style="margin:5px 0; color:#555;">Team Lead & Developer</p>
+        </div>
+
+        <div class="team-card" style="text-align:center; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <img src="/images/kanishka.jpeg" alt="Kanishka Joshi" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:15px;">
+          <h4 style="margin:0; font-weight:600;">Kanishka Joshi</h4>
+          <p style="margin:5px 0; color:#555;">Creative Designer</p>
+        </div>
+
+        <div class="team-card" style="text-align:center; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <img src="/images/ab.jpeg" alt="Abhay Chauhan" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:15px;">
+          <h4 style="margin:0; font-weight:600;">Abhay Chauhan</h4>
+          <p style="margin:5px 0; color:#555;">Front-End Magician</p>
+        </div>
+
+        <div class="team-card" style="text-align:center; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <img src="/images/Deepanshu.jpeg" alt="Deepanshu Mohakud" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:15px;">
+          <h4 style="margin:0; font-weight:600;">Deepanshu Mohakud</h4>
+          <p style="margin:5px 0; color:#555;">UI Craftsman</p>
+        </div>
+
+        <div class="team-card" style="text-align:center; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <img src="/images/tu.jpeg" alt="Tushar Agrawal" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:15px;">
+          <h4 style="margin:0; font-weight:600;">Tushar Agrawal</h4>
+          <p style="margin:5px 0; color:#555;">Backend Alchemist</p>
+        </div>
+
+        <div class="team-card" style="text-align:center; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <img src="/images/pr.jpeg" alt="Preksha Jain" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:15px;">
+          <h4 style="margin:0; font-weight:600;">Preksha Jain</h4>
+          <p style="margin:5px 0; color:#555;">Backend Sorceress</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-text">&copy; 2025 NextStop. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Firebase Auth JS -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBwaAqu8b6bchZ_9x4XLxZem-cixdKd35E",
+    authDomain: "nextstop-cdab2.firebaseapp.com",
+    projectId: "nextstop-cdab2",
+    storageBucket: "nextstop-cdab2.appspot.com",
+    messagingSenderId: "12223013337",
+    appId: "1:12223013337:web:8ed340a114e576afc239c8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const loggedOutEls = document.querySelectorAll("#auth-logged-out, #mobile-auth-logged-out");
+  const loggedInEls = document.querySelectorAll("#auth-logged-in, #mobile-auth-logged-in");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loggedOutEls.forEach(el => el.classList.add("hidden"));
+      loggedInEls.forEach(el => el.classList.remove("hidden"));
+    } else {
+      loggedOutEls.forEach(el => el.classList.remove("hidden"));
+      loggedInEls.forEach(el => el.classList.add("hidden"));
+    }
+  });
+
+  document.getElementById("logout-btn")?.addEventListener("click", () => signOut(auth));
+  document.getElementById("mobile-logout-btn")?.addEventListener("click", () => signOut(auth));
+</script>
+
+</body>
+</html>
